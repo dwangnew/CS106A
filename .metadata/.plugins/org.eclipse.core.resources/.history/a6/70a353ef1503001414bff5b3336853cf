@@ -1,0 +1,10 @@
+
+import acm.program.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class sec7 extends ConsoleProgram {
+	public void init() {
+		add(new JButton("Hello"), SOUTH);
+	}
+}

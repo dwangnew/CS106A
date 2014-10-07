@@ -1,0 +1,33 @@
+
+
+
+import java.io.*;
+import acm.program.*;
+
+public class sec5 extends ConsoleProgram {
+
+	// 1. word count
+	public void run() {
+		BufferedReader rd = read("lear.txt");
+	}
+	
+	private BufferedReader read(String filename) {
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader(filename));
+			
+		}
+		catch (FileNotFoundException e ) {
+			// print error
+		}
+		return rd;
+	}
+	
+	private void wordCount(BufferedReader rd) {
+		int lines = 0;
+		int words = 0;
+		int chars = 0;
+	}
+	
+	
+}

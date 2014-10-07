@@ -1,0 +1,14 @@
+
+// section 9 #2 expandable array
+
+import java.awt.*;
+import java.util.*;
+
+public class sec9 {
+	
+	public sec9(Object obj, int index) {
+		
+	}
+	
+	private Object[] arr;
+}

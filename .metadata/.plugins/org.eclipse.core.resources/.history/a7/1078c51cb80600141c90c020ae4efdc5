@@ -1,0 +1,18 @@
+// section 5 #3 unique names
+
+import java.io.*;
+import acm.program.*;
+
+//
+public class sec5_3 extends ConsoleProgram {
+	
+	//
+	public void run() {
+		while (true) {
+			String name = readLine("Please enter a name. Enter blank line to quit");
+			if (name == "") break;
+		}
+		
+	}
+	
+}

@@ -1,0 +1,28 @@
+
+// section 8
+
+import acm.program.*;
+import java.util.*;
+
+public class sec8 extends ConsoleProgram {
+	
+	//
+	public void run() {
+		// init db
+		createRoutes();
+		
+		// greeting
+		greetUser();
+		
+	}
+	
+	private void greetUser() {
+
+		println("Welcome to your travel agent. Please select starting city");
+		
+	}
+	
+	//
+	private HashMap<String,ArrayList<String>> routes;
+	private ArrayList<String> destinations;
+}

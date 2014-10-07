@@ -1,0 +1,28 @@
+
+
+
+import java.io.*;
+
+public class sec5 {
+
+	// 1. word count
+	public void run() {
+		read("lear.txt");
+	}
+	
+	private BufferedReader read(String filename) {
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader(filename));
+			
+		}
+		catch (FileNotFoundException e ) {
+			
+		}
+		return rd;
+	}
+	
+	
+	
+	
+}

@@ -1,0 +1,11 @@
+// section 5
+
+import java.io.*;
+import acm.program.*;
+
+
+public class sec5_2 extends ConsoleProgram {
+	public void run() {
+		
+	}
+}

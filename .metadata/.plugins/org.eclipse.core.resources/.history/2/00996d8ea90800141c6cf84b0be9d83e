@@ -1,0 +1,14 @@
+
+// section 8
+
+import acm.program.*;
+import java.util.*;
+
+public class sec8 extends ConsoleProgram {
+	
+	//
+	public void run() {
+		
+	}
+	
+}

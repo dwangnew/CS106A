@@ -1,0 +1,13 @@
+// section 6 #2. name counts
+
+import acm.program.*;
+import acm.graphics.*;
+
+//
+public class sec6_2 extends ConsoleProgram {
+
+	public void run() {
+		
+	}
+	
+}

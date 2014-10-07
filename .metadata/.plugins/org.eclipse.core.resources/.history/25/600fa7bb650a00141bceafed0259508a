@@ -1,0 +1,37 @@
+
+// section 9 #2 expandable array
+
+import java.awt.*;
+import java.util.*;
+
+public class sec9 {
+	
+	public sec9(Object obj, int index) {
+		arr = new Object[index];
+		arr[index] = obj;
+	}
+	
+	public Object get(int index) {
+		if ( index + 1 > arr.length ) {
+			return null;
+		}
+		else {
+			return arr[index];
+		}
+	}
+	
+	public void set(Object obj, int index) {
+		if (index + 1> arr.length) {
+			Object[] newArr = new Object[index];
+			newArr[index] = obj
+			for (int i = 0 ; i < arr.length ; i++) {
+				
+			}
+		}
+		else {
+			arr[index] = obj;
+		}
+	}
+	
+	private Object[] arr;
+}

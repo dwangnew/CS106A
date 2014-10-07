@@ -1,0 +1,38 @@
+// section 5 #2 displaying histogram from file
+
+import java.io.*;
+import acm.program.*;
+
+//
+public class sec5_2 extends ConsoleProgram {
+	
+	//
+	public void run() {
+		// create int array of scores 0-9, 10-19, ... , 90-99, 100
+		int[] scores = new int[11];
+		
+		// open file using try/catch block
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader("MidtermScores.txt"));
+		}
+		catch (Exception e) {
+			//
+		}
+		try {
+			while (true) {
+				String line = rd.readLine();
+				if (line == null) break;
+				int score = Integer.valueOf(line);
+				scores[score/10] = scores[score/10] + 1;
+			}
+		}
+		catch (Exception e) {
+			//
+		}
+		for (int i = 0 ; i<scores.length ; i++ ) {
+			println(scores[i]);
+		}
+		
+	}
+}

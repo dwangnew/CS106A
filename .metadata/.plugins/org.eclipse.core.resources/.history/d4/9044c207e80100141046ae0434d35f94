@@ -1,0 +1,12 @@
+
+public class test {
+	private void calcScore() {
+		
+		
+		switch () {
+			case 1-6:
+				
+				break;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+
+public class test {
+	private void calcScore() {
+		switch (category) {
+			case 1-6:
+				
+				break;
+		}
+		return 0;
+	}
+}

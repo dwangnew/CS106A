@@ -1,0 +1,162 @@
+/*
+ * File: HangmanCanvas.java
+ * ------------------------
+ * This file keeps track of the Hangman display.
+ */
+
+import acm.graphics.*;
+
+public class HangmanCanvas extends GCanvas {
+
+/** Resets the display so that only the scaffold appears */
+	public void reset() {
+		removeAll();
+		guesses = "";
+		count = 0;
+		// save middle coordinates
+		CX = getWidth() / 2;
+		CY = getHeight() /2;
+		// add scaffold - the vertical line on the left
+		add(new GLine(CX - BEAM_LENGTH, FLOOR, 
+					  CX - BEAM_LENGTH, FLOOR - SCAFFOLD_HEIGHT ));
+		// add beam - the horizontal line at the top connecting rope to scaffold
+		add(new GLine(CX - BEAM_LENGTH, FLOOR - SCAFFOLD_HEIGHT, 
+					  CX			  , FLOOR - SCAFFOLD_HEIGHT));
+		// rope
+		add(new GLine(CX, FLOOR - SCAFFOLD_HEIGHT,
+					  CX, FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH));
+		//
+		
+	}
+
+/**
+ * Updates the word on the screen to correspond to the current
+ * state of the game.  The argument string shows what letters have
+ * been guessed so far; unguessed letters are indicated by hyphens.
+ */
+	public void displayWord(String word) {
+		if (wordLabel != null) {
+			remove(wordLabel);
+		}
+		wordLabel = new GLabel(word, 50, getHeight()-100);
+		wordLabel.setFont("Times-36");
+		add(wordLabel);
+	}
+
+/**
+ * Updates the display to correspond to an incorrect guess by the
+ * user.  Calling this method causes the next body part to appear
+ * on the scaffold and adds the letter to the list of incorrect
+ * guesses that appears at the bottom of the window.
+ */
+	public void noteIncorrectGuess(char letter) {
+		addNextPart();
+		if (guessLabel != null) {
+			remove(guessLabel);
+		}
+		guesses = guesses + letter;
+		guessLabel = new GLabel(guesses, 50, getHeight()-50);
+		guessLabel.setFont("Times-24");
+		add(guessLabel);
+	}
+	
+	private void addNextPart() {
+		switch (count) {
+		//add head
+			case 0: 
+				add(new GOval(
+						CX - HEAD_RADIUS, 
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH ,
+						2*HEAD_RADIUS, 2*HEAD_RADIUS));
+				break;
+		//add body
+			case 1:
+				add(new GLine(
+						CX, FLOOR - SCAFFOLD_HEIGHT +ROPE_LENGTH + 2*HEAD_RADIUS,
+						CX, FLOOR - SCAFFOLD_HEIGHT +ROPE_LENGTH + 2*HEAD_RADIUS + BODY_LENGTH));
+				add(new GLine(
+						CX - BODY_LENGTH/2,
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH + 2*HEAD_RADIUS + ARM_OFFSET_FROM_HEAD,
+						CX + BODY_LENGTH/2,
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH + 2*HEAD_RADIUS + ARM_OFFSET_FROM_HEAD)); 
+				break;
+		// left arm
+			case 2:
+				add(new GLine(
+						CX - BODY_LENGTH/2,
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH + 2*HEAD_RADIUS + ARM_OFFSET_FROM_HEAD,
+						CX - BODY_LENGTH/2,
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH + 2*HEAD_RADIUS + ARM_OFFSET_FROM_HEAD + UPPER_ARM_LENGTH
+						));
+				break;
+		// right arm
+			case 3:
+				add(new GLine(
+						CX + BODY_LENGTH/2,
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH + 2*HEAD_RADIUS + ARM_OFFSET_FROM_HEAD,
+						CX + BODY_LENGTH/2,
+						FLOOR - SCAFFOLD_HEIGHT + ROPE_LENGTH + 2*HEAD_RADIUS + ARM_OFFSET_FROM_HEAD + UPPER_ARM_LENGTH
+						));
+				break;
+				break;
+		// left leg
+			case 4:
+				add(new GLine(
+						CX,
+						FLOOR+ROPE_LENGTH ,
+						HEAD_RADIUS, 
+						HEAD_RADIUS)); 
+				break;
+		//add right leg
+			case 5:
+				add(new GLine(
+						CX,
+						FLOOR+ROPE_LENGTH ,
+						HEAD_RADIUS,
+						HEAD_RADIUS)); 
+				break;
+		//add left foot
+			case 6:
+				add(new GLine(
+						CX,
+						FLOOR+ROPE_LENGTH ,
+						HEAD_RADIUS, 
+						HEAD_RADIUS)); 
+				break;
+		//add right foot
+			case 7:
+				add(new GLine(
+						CX, FLOOR+ROPE_LENGTH , HEAD_RADIUS, HEAD_RADIUS)); 
+				break;
+
+		
+		}
+		count++;
+	}
+
+/* Constants for the simple version of the picture (in pixels) */
+	
+	private static final int SCAFFOLD_HEIGHT = 360;
+	private static final int BEAM_LENGTH = 144;
+	private static final int ROPE_LENGTH = 18;
+	private static final int HEAD_RADIUS = 36;
+	private static final int BODY_LENGTH = 144;
+	private static final int ARM_OFFSET_FROM_HEAD = 28;
+	private static final int UPPER_ARM_LENGTH = 72;
+	private static final int LOWER_ARM_LENGTH = 44;
+	private static final int HIP_WIDTH = 36;
+	private static final int LEG_LENGTH = 108;
+	private static final int FOOT_LENGTH = 28;
+	
+// helper constants	
+	private static final int FLOOR = 400;
+
+	// helper instance vars
+	private int CX;
+	private int CY;
+	
+	private GLabel wordLabel;
+	private GLabel guessLabel;
+	private String guesses = "";
+	private int count = 0;
+}

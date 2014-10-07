@@ -1,0 +1,9 @@
+// section 5 #3 displaying histogram from file
+
+import java.io.*;
+import acm.program.*;
+
+//
+public class sec5_3 extends ConsoleProgram {
+	
+}

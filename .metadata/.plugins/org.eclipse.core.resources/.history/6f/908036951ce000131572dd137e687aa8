@@ -1,0 +1,20 @@
+
+import acm.program.*;
+
+public class sec2 {
+
+	private static final int MAX = 1000;
+	
+	public void run() extends ConsoleProgram {
+		int a = 0;
+		int b = 1;
+		int c;
+		while (b<MAX) {
+			c = a + b;
+			a = b;
+			b = c;
+		}
+	}
+	
+	
+}

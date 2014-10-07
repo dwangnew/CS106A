@@ -1,0 +1,11 @@
+// serves as an object of type GCompound of both the box and text for section 7
+
+import acm.graphics.*;
+
+public class sec7Box extends GCompound {
+
+	public sec7Box(String name){
+		
+	}
+	
+}

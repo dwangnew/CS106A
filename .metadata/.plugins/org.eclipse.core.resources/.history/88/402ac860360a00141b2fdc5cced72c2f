@@ -1,0 +1,119 @@
+/*
+ * File: NameSurferGraph.java
+ * ---------------------------
+ * This class represents the canvas on which the graph of
+ * names is drawn. This class is responsible for updating
+ * (redrawing) the graphs whenever the list of entries changes or the window is resized.
+ */
+
+import acm.graphics.*;
+import java.awt.event.*;
+import java.util.*;
+import java.awt.*;
+
+public class NameSurferGraph extends GCanvas
+	implements NameSurferConstants, ComponentListener {
+
+	/**
+	* Creates a new NameSurferGraph object that displays the data.
+	*/
+	public NameSurferGraph() {
+		addComponentListener(this);
+		update();
+	}
+	
+	/**
+	* Clears the list of name surfer entries stored inside this class.
+	*/
+	public void clear() {
+		//	 You fill this in //
+		// clears the arraylist of names
+		entries.clear();
+	}
+	
+	/* Method: addEntry(entry) */
+	/**
+	* Adds a new NameSurferEntry to the list of entries on the display.
+	* Note that this method does not actually draw the graph, but
+	* simply stores the entry; the graph is drawn by calling update.
+	*/
+	public void addEntry(NameSurferEntry entry) {
+		// You fill this in //
+		entries.add(entry);
+		update();
+	}
+	
+	
+	
+	/**
+	* Updates the display image by deleting all the graphical objects
+	* from the canvas and then reassembling the display according to
+	* the list of entries. Your application must call update after
+	* calling either clear or addEntry; update is also called whenever
+	* the size of the canvas changes.
+	*/
+	public void update() {
+		drawBG();
+		drawEntries();
+	}
+	
+	// draws the background
+	private void drawBG() {
+		
+		// draw horizontal lines at top and bottom
+		add(new GLine(0,GRAPH_MARGIN_SIZE,APPLICATION_WIDTH,GRAPH_MARGIN_SIZE));
+		add(new GLine(0,APPLICATION_HEIGHT-GRAPH_MARGIN_SIZE-BOTTOM_BAR_HEIGHT,APPLICATION_WIDTH,APPLICATION_HEIGHT-GRAPH_MARGIN_SIZE-BOTTOM_BAR_HEIGHT));
+		
+		// add horizontal lines representing each decade
+		for (int i = 1 ; i < 11 ; i ++ ) {
+			add(new GLine(i*DECADE_WIDTH,0,i*DECADE_WIDTH,APPLICATION_HEIGHT));
+		}
+		
+		// decade labels
+		for (int i = 0 ; i < 12 ; i ++ ) {
+			add(
+					new GLabel(
+						String.valueOf(((i*10)+1900)),
+						(i-1)*DECADE_WIDTH,
+						APPLICATION_HEIGHT-GRAPH_MARGIN_SIZE-BOTTOM_BAR_HEIGHT
+						)
+			);
+		}
+	
+	}
+	
+	// iterates through all entries in the arraylist and calls the function to draw each one
+	private void drawEntries() {
+		for (int i = 0 ; i < entries.size() ; i++ ) {
+			drawEntry(entries.get(i));
+		}
+	}
+	
+	// draws an individual graph for a name
+	private void drawEntry(NameSurferEntry entry) {
+		// get name
+		String name = entry.getName();
+		
+		// goes through the ranks and draws them
+		for (int i = 0 ; i < 11 ; i++ ) {
+			int rank = entry.getRankByIndex(i);
+			String rankString = String.valueOf(rank);
+			add(new GLabel(name + firstRankString, last.getX(), last.getY()));
+			add(new GLine(last.getX(), last.getY(), APPLICATION_WIDTH/i, rank/GRAPH_HEIGHT));
+			last = new GPoint(APPLICATION_WIDTH/i, GRAPH_HEIGHT/rank);
+			
+		}
+	}
+	
+	
+	/* Implementation of the ComponentListener interface */
+	public void componentHidden(ComponentEvent e) { }
+	public void componentMoved(ComponentEvent e) { }
+	public void componentResized(ComponentEvent e) { update(); }
+	public void componentShown(ComponentEvent e) { }
+	
+	// instance vars
+	private ArrayList<NameSurferEntry> entries = new ArrayList<NameSurferEntry>();
+	
+	
+}

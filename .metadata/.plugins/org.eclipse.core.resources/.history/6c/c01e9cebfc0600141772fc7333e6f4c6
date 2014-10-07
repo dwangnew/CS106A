@@ -1,0 +1,60 @@
+
+// section 7 interactors
+
+import acm.program.*;
+import acm.graphics.*;
+
+import java.util.*;
+
+import java.awt.event.*;
+
+import javax.swing.*;
+
+//
+public class sec7 extends GraphicsProgram {
+	
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 600;
+	private static final int CX = 400;
+	private static final int CY = 300;
+	
+	// set up layout of window
+	public void init() {
+		setSize(WIDTH , HEIGHT );
+		// textfield and its label
+		add(new JLabel("Name"), SOUTH);
+		add(textField , SOUTH);
+		// add buttons
+		add(new JButton("Add"), SOUTH);
+		add(new JButton("Remove"), SOUTH);
+		add(new JButton("Clear"), SOUTH);
+		// event listeners
+		addActionListeners();
+	}
+	
+	// event callbacks
+	public void actionPerformed(ActionEvent e) {
+		if ( e.getActionCommand() == "Add" ){
+			String name = textField.getText();
+			println("add  " + name );
+			boxes.put(name, createBox(name));
+			add(boxes.get(name) , CX, CY);
+		}
+		if ( e.getActionCommand() == "Remove" ){
+			println("rem " + textField.getText() );
+		}
+		if ( e.getActionCommand() == "Clear" ){
+			println("clear");
+		}
+	}
+	
+	private GCompound createBox (String name) {
+		return new GCompound();
+	}
+	
+	
+	// textfield for other functions to get its text
+	private JTextField textField = new JTextField(50);
+	// hashmap to keep track of new boxes
+	private HashMap<String, GCompound> boxes = new HashMap<String, GCompound>();
+}

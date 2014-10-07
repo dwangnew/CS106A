@@ -1,0 +1,12 @@
+
+public class test {
+	private void calcScore() {
+		int ans = readInt("Enter int";)
+		
+		switch () {
+			case 1-6:
+				
+				break;
+		}
+	}
+}

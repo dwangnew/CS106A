@@ -1,0 +1,155 @@
+/*
+ * File: Hangman.java
+ * ------------------
+ * This program will eventually play the Hangman game from
+ * Assignment #4.
+ */
+
+import acm.graphics.*;
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.*;
+
+public class Hangman extends ConsoleProgram {
+	
+	// the amount of guesses one has before the 'hangman is hung'
+	private static final int LIVES = 8;
+	
+	// set up the canvas / graphical display
+	public void init() {
+		canvas = new HangmanCanvas();
+		add(canvas);
+	}
+	
+	// runs the program
+    public void run() {
+    	// welcome message to running the program
+    	greetUser();
+    	// start game loop
+		while (true) {
+			String s = readLine("Enter 1 to play: ");
+			if (s.equals("1")) {
+				runGame();
+			}
+		}
+	}
+    
+    // prints a greeting right after the game starts
+    private void greetUser() {
+    	println("Welcome to Hangman for CS106A Assignment 4");
+    }
+    
+    // comprises one playthrough of the game
+    private void runGame() {
+    	// sets up game variables, canvas window
+    	canvas.reset();
+    	lives = LIVES;
+    	getWord();
+    	getWordWithBlanks();
+    	canvas.displayWord(wordWithBlanks);
+    	// main loop where the user guesses
+    	while (isGameRunning()) {
+    		nextTurn();
+    	}
+    	endGame();
+    	
+    }
+
+    // sets the instance variable 'word' with a random word from the list of possible words
+    private void getWord() {
+    	int num = lexicon.getWordCount();
+    	int random = rgen.nextInt(0,num-1);
+    	word = lexicon.getWord(random);
+    }
+    
+    // builds up the String with only dashes with the same length as the word
+    private void getWordWithBlanks() {
+    	wordWithBlanks = "";
+    	for (int i = 0 ; i < word.length() ; i++ ) {
+    		wordWithBlanks = wordWithBlanks + "-";
+    	}
+    }
+    
+    // checks to see if win or lose conditions are fulfilled
+    private boolean isGameRunning() {
+    	if ( lives > 0 && !word.equals(wordWithBlanks) ) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    // the basic unit of the game. 
+    // User sees the blanked out letters 
+    // with the letters correctly guessed.
+    // Then is prompted to enter next letter.
+    // Notifies user if guess is correct.
+    private void nextTurn() {
+    	// print current status
+    	println("The word now looks like this " + wordWithBlanks);
+    	println("You have " + lives + " guesses left");
+    	// get letter from user
+    	String letter = readLine("Enter a letter: ");
+    	while( letter.length() != 1) {
+    		letter = readLine("Enter a single letter: ");
+    	}
+    	letter = letter.toUpperCase();
+    	// check if letter in word and update accordingly
+    	if ( word.contains(letter) ) {
+    		println("The letter " + letter + " is in the word");
+    		revealLetters(letter);
+    		canvas.displayWord(wordWithBlanks);
+    	}
+    	else {
+    		println("The letter " + letter + " is not in the word");
+    		canvas.noteIncorrectGuess(letter.charAt(0));
+    		lives--;
+    	}
+    }
+    
+    // updates the wordWithBlanks to have the correctly guessed letters
+    private void revealLetters(String l) {
+    	int maxIndex = 0;
+    	int index = word.indexOf(l);
+    	while (index >= 0) {
+    		wordWithBlanks = wordWithBlanks.substring(0, index) 
+    							+ word.substring(index,index+1) 
+    							+ wordWithBlanks.substring(index+1);
+    		maxIndex = index+1;
+    		index = word.indexOf(l, maxIndex);
+    	}
+    }
+    
+    // Prints the word and if win or lose.
+    private void endGame() {
+    	if ( lives <= 0 ) {
+    		println("You have run out of lives!");
+    		println("The word was " + word);
+    		println("Better luck next time");
+    	}
+    	else {
+    		println("You correctly solved the word " + word);
+    		println("You won!");
+    	}
+    }
+    
+    //
+    private HangmanCanvas canvas;
+    
+    // number of lives
+    private int lives;
+    
+    //
+    private HangmanLexicon lexicon = new HangmanLexicon();
+    
+    //
+    private RandomGenerator rgen = new RandomGenerator();
+    
+    //
+    private String word = "";
+    
+    //
+    private String wordWithBlanks = "";
+}

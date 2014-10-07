@@ -1,0 +1,17 @@
+
+import acm.program.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class sec7 extends ConsoleProgram {
+	public void init() {
+		setSize(800, 600);
+		add(new JButton("Hello"), SOUTH);
+		addActionListeners();
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+	
+}

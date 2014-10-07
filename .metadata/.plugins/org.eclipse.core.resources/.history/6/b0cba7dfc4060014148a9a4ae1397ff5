@@ -1,0 +1,38 @@
+// section 6 #2. name counts
+
+import java.util.*;
+
+import acm.program.*;
+import acm.graphics.*;
+
+//
+public class sec6_2 extends ConsoleProgram {
+
+	//
+	public void run() {
+//		 prompt user for names
+		while (true) {
+			String name = readLine("Please enter a name. Enter a blank to quit \n");
+			//sentinel 
+			if (name.equals("")) break;
+			// add name to arraylist of keys and hashmap if not already there
+			if (!list.contains(name)){
+				list.add(name);
+				map.put(name, 1);
+			} else {
+				map.put(name, map.get(name)+1);
+				;
+			}
+		}
+		// output all in list of names
+		println("List of names: ");
+		for (int i = 0 ; i < list.size() ; i++ ) {
+			println(list[i]);
+			map.get(list[i]));
+		}
+	}
+
+	private ArrayList<String> list = new ArrayList<String>();
+	private HashMap<String,Integer> map = new HashMap<String,Integer>();
+		
+}

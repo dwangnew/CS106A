@@ -1,0 +1,32 @@
+// section 5 #3 unique names
+
+import java.io.*;
+import acm.program.*;
+import java.util.*;
+
+//
+public class sec5_3 extends ConsoleProgram {
+	
+	//
+	public void run() {
+		// prompt user for names
+		String name = readLine("Please enter a name. Enter a space to quit \n");
+		while (name != " ") {
+			name = readLine("Please enter a name. Enter a space to quit \n");
+			// add name if not already there
+			if (list.contains(name)){
+				println("name already entered" + "-->" + name + "<--");
+			} else {
+				list.add(name);
+			}
+		}
+		// output all in list of names
+		for (int i = 0 ; i < list.size() ; i++ ) {
+			println(list.get(i));
+		}
+		
+	}
+	
+	private ArrayList<String> list = new ArrayList<String>();
+	
+}

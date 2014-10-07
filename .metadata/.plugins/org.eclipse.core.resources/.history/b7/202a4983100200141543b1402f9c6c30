@@ -1,0 +1,173 @@
+/*
+ * File: Yahtzee.java
+ * ------------------
+ * This program will eventually play the Yahtzee game.
+ */
+
+import acm.io.*;
+import acm.program.*;
+import acm.util.*;
+import java.util.*;
+
+public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
+	
+	// not sure what this is
+	public static void main(String[] args) {
+		new Yahtzee().start(args);
+	}
+	
+	// self-explanatory
+	public void run() {
+		setUp();
+		playGame();
+	}
+	
+	// prompts user for number of players and the name of each player
+	// then initializes the YahtzeeDisplay class with the right params
+	private void setUp() {
+		setSize(APPLICATION_WIDTH,APPLICATION_HEIGHT);
+		IODialog dialog = getDialog();
+		nPlayers = dialog.readInt("Enter number of players");
+		while (nPlayers > MAX_PLAYERS) {
+			nPlayers = dialog.readInt("Enter number of players - must be between 1 to 4");
+		}
+		playerNames = new String[nPlayers];
+		for (int i = 1; i <= nPlayers; i++) {
+			playerNames[i - 1] = dialog.readLine("Enter name for player " + i);
+		}
+		// initializes the YahtzeeDisplay class with the right params
+		display = new YahtzeeDisplay(getGCanvas(), playerNames);
+	}
+
+	// starts a game after YahtzeeDisplay is created
+	private void playGame() {
+		round = 1;
+		while (!isGameOver()) {
+			playRound();
+		}
+		endGame();
+	}
+	
+	// checks to see if all 13 rounds have been played
+	private boolean isGameOver() {
+		if (round <= 13) return false;
+		else return true;
+	}
+	
+	// plays a round by looping for each player and calls the playTurn method for that player
+	private void playRound() {
+		for (int i = 0; i < nPlayers; i++) {
+			playTurn(i+1);
+		}
+		// increases the round count after the round is finished for all players
+		round++;
+	}
+	
+	// plays a turn for player i
+	private void playTurn(int player) {
+		display.printMessage("Round number " + String.valueOf(round) + ". "
+				+ playerNames[player-1] + "'s turn. Please click Roll");
+		display.waitForPlayerToClickRoll(player);
+		rollDice();
+		display.displayDice(die);
+		display.waitForPlayerToSelectDice();
+		reRollDice();
+		display.displayDice(die);
+		display.waitForPlayerToSelectDice();
+		reRollDice();
+		display.displayDice(die);
+		int category  = display.waitForPlayerToSelectCategory();
+		int score = calcScore(category);
+		display.updateScorecard(category, player, score);
+	}
+	
+	// generates random dice numbers - returns 5 member matrix of values 1-6
+	private void rollDice() { 
+		for ( int i = 0 ; i < N_DICE ; i++ ) {
+			die[i] = rgen.nextInt(1, 6);
+		}
+	}
+	
+	private void reRollDice() { 
+		for ( int i = 0 ; i < N_DICE ; i++ ) {
+			if (display.isDieSelected(i)) {
+				die[i] = rgen.nextInt(1, 6);
+			}
+		}
+	}
+	
+	private int calcScore(int category) {
+		HashMap<Integer,Integer> count = new HashMap<Integer,Integer>();
+		for (int i = 0; i < 5; i++) {
+			if (count.containsKey(die[i])) {
+				count.put(die[i],count.get(die[i])+1);
+			}
+			else {
+				count.put(die[i], 1);
+			}
+		}
+		if (category <= SIXES) {
+			return count.get(category) * category;
+		}
+		
+		switch (category) {
+		
+			int sum = 0;
+			case THREE_OF_A_KIND:
+				if ( count.containsValue(3) || count.containsValue(4) || count.containsValue(5) ) {
+					for (int i = 0; i < 5 ; i++ ) {
+						sum += die[i];
+					}
+				}
+				return sum;
+				break;
+
+			case FOUR_OF_A_KIND:
+				if ( count.containsValue(4) || count.containsValue(5) ) {
+					for (int i = 0; i < 5 ; i++ ) {
+						sum += die[i];
+					}
+				}
+				return sum;
+				break;
+				
+			case FULL_HOUSE:
+				
+				
+				
+				
+				
+				
+		}
+		
+		
+		
+		
+		
+		
+		
+		return 0;
+	}
+	
+	
+	// counts scores, notifies winner
+	private void endGame() {
+		// add scores
+		
+		// crown victor
+	}
+	
+	
+/* Private instance variables */
+	private int nPlayers;
+	private String[] playerNames;
+	
+	private YahtzeeDisplay display;
+	private RandomGenerator rgen = new RandomGenerator();
+	
+	private int[] die = new int[5];
+	private int[] scores;
+	
+	private int round;
+	
+}

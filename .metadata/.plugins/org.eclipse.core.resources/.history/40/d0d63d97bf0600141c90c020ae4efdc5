@@ -1,0 +1,25 @@
+// sec 6 #1 flip image
+
+import acm.program.*;
+import acm.graphics.*;
+
+public class sec6_1 extends GraphicsProgram {
+
+	public void run() {
+		GImage image = new GImage("milkmaid.jpg");
+		GImage flip = flipImage(image);
+		
+		image.scale(.3);
+		add(image, 0, 0);
+		
+		flip.scale(.5);
+		add(flip,200,200);
+	}
+	
+	private GImage flipImage(GImage image) {
+		
+		return image;
+	}
+	
+	
+}

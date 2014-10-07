@@ -1,0 +1,70 @@
+/*
+ * File: Hangman.java
+ * ------------------
+ * This program will eventually play the Hangman game from
+ * Assignment #4.
+ */
+
+import acm.graphics.*;
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.*;
+
+public class Hangman extends ConsoleProgram {
+	
+	private static final int LIVES = 8;
+	
+	
+    public void run() {
+		while (true) {
+			runGame();
+		}
+	}
+    
+    private void runGame() {
+    	greetUser();
+    	getWord();
+    	while (isGameRunning()) {
+    		nextTurn();
+    	}
+    	endGame();
+    	
+    }
+    
+    private void greetUser() {
+    	println("Welcome to Hangman for CS106A Assignment 4");
+    }
+    
+    private void getWord() {
+    	int num = lexicon.getWordCount();
+    	int random = rgen.nextInt(0,num);
+    	word = lexicon.getWord(random);
+    }
+    
+    private boolean isGameRunning() {
+    	if (lives > 0 && word not solved) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    private void nextTurn() {
+    	
+    }
+    
+    private void endGame() {
+    	if ( lives <= 0 ) {
+    		println("You have run out of lives!")
+    		println("The word was " + word);
+    		println("Better luck next time");
+    	}
+    }
+    
+    private int lives = LIVES;
+    private String word;
+    private HangmanLexicon lexicon = new HangmanLexicon();
+    private RandomGenerator rgen = new RandomGenerator();
+}

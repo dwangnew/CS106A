@@ -1,0 +1,50 @@
+
+// section 7 interactors
+
+import acm.program.*;
+import acm.graphics.*;
+import acmx.export.javax.swing.JTextField;
+import java.util.*;
+
+import java.awt.event.*;
+import javax.swing.*;
+
+//
+public class sec7 extends GraphicsProgram {
+	
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 600;
+	
+	// set up layout of window
+	public void init() {
+		setSize(WIDTH , HEIGHT );
+		// textfield and its label
+		add(new JLabel("Name"), SOUTH);
+		add(textField , SOUTH);
+		// add buttons
+		add(new JButton("Add"), SOUTH);
+		add(new JButton("Remove"), SOUTH);
+		add(new JButton("Clear"), SOUTH);
+		// event listeners
+		addActionListeners();
+	}
+	
+	// event callbacks
+	public void actionPerformed(ActionEvent e) {
+		if ( e.getActionCommand() == "Add" ){
+			println("add  " + textField.getText() );
+			add(new GLabel(textField.getText(),WIDTH/2,HEIGHT/2));
+		}
+		if ( e.getActionCommand() == "Remove" ){
+			println("rem " + textField.getText() );
+		}
+		if ( e.getActionCommand() == "Clear" ){
+			println("clear");
+		}
+	}
+	
+	// textfield for other functions to get its text
+	private JTextField textField = new JTextField(50);
+	// arraylist to keep track of new boxes
+	private ArrayList<GCompound> boxes = new ArrayList<GCompound>();
+}

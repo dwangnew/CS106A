@@ -1,0 +1,83 @@
+/* MyProgram.java
+ * --------------
+ * Modify this file any way you like (or create additional files in
+ * the ACMStarterProject) in order to experiment with the capabilities
+ * of the ACM libraries.
+ * 
+ * NOTE: While you are free to do whatever you like with this project,
+ * it is still best to use the assignment-specific starter files
+ * for actual assignments.
+ */
+import acm.program.*;
+import acm.graphics.*;
+
+//handout 12 checkboard
+//public class MyProgram extends GraphicsProgram {
+//	
+//	private static final int NROWS = 8;
+//	private static final int NCOLUMNS = 8;
+//	
+//	public void run() {
+//		for (int i=0;i<NCOLUMNS;i++) {
+//			drawRow(i);
+//		}
+//	}
+//
+//	private void drawRow(int height) {
+//		for (int i=0;i<NCOLUMNS;i++) {
+//			GRect sq = new GRect(20*i,20*height,20,20);
+//			sq.setFilled(((i+height)%2 == 0));
+//			add(sq);
+//		}
+//	}
+//
+//}
+
+
+// section 2 #1 fibonacci
+//public class MyProgram extends ConsoleProgram {
+//
+//	private static final int MAX = 10000;
+//
+//	public void run(){
+//		int a = 0;
+//		int b = 1;
+//		int c;
+//		while (b<MAX) {
+//			c = a + b;
+//			a = b;
+//			b = c;
+//			println(a);
+//		}
+//	}
+//}
+
+
+//sec2#2 face
+public class MyProgram extends GraphicsProgram {
+	
+	private static final int HEAD_WIDTH = 100;
+	private static final int HEAD_HEIGHT = 200;
+	private static final int EYE_RADIUS = 20;
+	private static final int MOUTH_WIDTH = 50;
+	private static final int MOUTH_HEIGHT = 20;
+	
+	public void run() {
+		draw_head();
+		draw_eyes();
+		draw_mouth();
+	}
+	
+	private void draw_head() {
+		add(new GRect(0,0,HEAD_WIDTH,HEAD_HEIGHT))
+	}
+	
+	private void draw_eyes() {
+		
+	}
+	
+	private void draw_mouth() {
+		
+	}
+	
+}

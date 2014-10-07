@@ -1,0 +1,19 @@
+// serves as an object of type GCompound of both the box and text for section 7
+
+import acm.graphics.*;
+
+public class sec7Box extends GCompound {
+
+	private static final int BOX_WIDTH = 100;
+	private static final int BOX_HEIGHT = 80;
+	private static final int TEXT_SIZE = 16;
+	
+	
+	public sec7Box(String name){
+		GLabel label = new GLabel(name);
+		add(label, BOX_WIDTH/2 - label.getWidth()/2 , BOX_HEIGHT/2 - label.getAscent()/2 );
+		add(new GLine(0,0,BOX_WIDTH,0));
+		add(new GLine(0, BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT))
+	}
+	
+}

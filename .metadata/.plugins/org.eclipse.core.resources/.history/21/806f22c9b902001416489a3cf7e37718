@@ -1,0 +1,63 @@
+// section 5
+
+import java.io.*;
+import acm.program.*;
+
+public class sec5 extends ConsoleProgram {
+
+	// 1. word count
+	public void run() {
+		BufferedReader rd = read("lear.txt");
+	}
+	
+	// open the file
+	private BufferedReader read(String filename) {
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader(filename));
+			
+		}
+		catch (FileNotFoundException e ) {
+			// print error
+		}
+		return rd;
+	}
+	
+	// count things
+	private void counter(BufferedReader rd) {
+		int lines = 0;
+		int words = 0;
+		int chars = 0;
+		try {
+			while (true) {
+				String line = rd.readLine();
+				if (line == null) break;
+				lines++;
+				words += wordCount(line);
+				chars += charCount(line);
+			}
+		}
+		catch (Exception e) {
+			// print error
+		}
+		
+		println("lines " + lines);
+	}
+	
+	private int wordCount(String line) {
+		int words = 1;
+		for (int i = 0; i<line.length(); i ++ ) {
+			if ( ' ' == line.charAt(i)) {
+				words++;
+			}
+		}
+		
+		return words;
+	}
+	
+	private int charCount(String line) {
+		return line.length();
+	}
+	
+	
+}

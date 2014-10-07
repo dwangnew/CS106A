@@ -1,0 +1,25 @@
+// section 5
+
+import java.io.*;
+import acm.program.*;
+
+
+public class sec5_2 extends ConsoleProgram {
+	public void run() {
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader("MidtermScores.txt"));
+		}
+		catch (Exception e) {
+			//
+		}
+		try {
+			String line = rd.readLine();
+		}
+		catch (Exception e) {
+			
+		}
+		
+		
+	}
+}

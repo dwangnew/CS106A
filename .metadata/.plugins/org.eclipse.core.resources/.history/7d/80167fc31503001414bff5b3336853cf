@@ -1,0 +1,8 @@
+
+
+import java.awt.event.*;
+import javax.swing.*;
+
+public class sec7 extends ConsoleProgram {
+
+}

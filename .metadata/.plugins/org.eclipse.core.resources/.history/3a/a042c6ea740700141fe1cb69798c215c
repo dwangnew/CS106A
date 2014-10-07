@@ -1,0 +1,51 @@
+/*
+ * File: NameSurfer.java
+ * ---------------------
+ * When it is finished, this program will implements the viewer for
+ * the baby-name database described in the assignment handout.
+ */
+
+import acm.graphics.*
+import acm.program.*;
+import java.awt.event.*;
+import java.util.HashMap;
+
+import javax.swing.*;
+
+public class NameSurfer extends Program implements NameSurferConstants {
+
+/* Method: init() */
+/**
+ * This method has the responsibility for reading in the data base
+ * and initializing the interactors at the bottom of the window.
+ */
+	public void init() {
+	    // change window size
+		setSize(APPLICATION_WIDTH,APPLICATION_HEIGHT);
+		// textfield and its label
+		add(new JLabel("Name"), SOUTH);
+		add(textField , SOUTH);
+		// add buttons
+		add(new JButton("Add"), SOUTH);
+		add(new JButton("Remove"), SOUTH);
+		add(new JButton("Clear"), SOUTH);
+		// event listeners
+		addActionListeners();
+	}
+
+/* Method: actionPerformed(e) */
+/**
+ * This class is responsible for detecting when the buttons are
+ * clicked, so you will have to define a method to respond to
+ * button actions.
+ */
+	public void actionPerformed(ActionEvent e) {
+		// You fill this in //
+	}
+	
+	// textfield for other functions to get its text
+	private JTextField textField = new JTextField(50);
+	// hashmap to keep track of new boxes
+	private HashMap<String, GCompound> boxes = new HashMap<String, GCompound>();
+	
+}

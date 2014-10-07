@@ -1,0 +1,10 @@
+// section 6 #2. name counts
+
+//
+public class sec6_2 extends ConsoleProgram {
+
+	public void run() {
+		
+	}
+	
+}

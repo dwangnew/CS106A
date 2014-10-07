@@ -1,0 +1,39 @@
+
+// section 7 interactors
+
+import acm.program.*;
+import acm.graphics.*;
+import acmx.export.javax.swing.JTextField;
+
+import java.awt.event.*;
+import javax.swing.*;
+
+//
+public class sec7 extends GraphicsProgram {
+	
+	//
+	public void init() {
+		setSize(800, 600);
+		add(new JLabel("Name"), SOUTH);
+		add(textField , SOUTH);
+		add(new JButton("Add"), SOUTH);
+		add(new JButton("Remove"), SOUTH);
+		add(new JButton("Clear"), SOUTH);
+		addActionListeners();
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if ( e.getActionCommand() == "Add" ){
+			println("add  " + textField.getText() );
+			add(new GLabel("sdfsdf",0,0));
+		}
+		if ( e.getActionCommand() == "Remove" ){
+			println("rem " + textField.getText() );
+		}
+		if ( e.getActionCommand() == "Clear" ){
+			println("clear");
+		}
+	}
+	
+	private JTextField textField = new JTextField(50);
+}

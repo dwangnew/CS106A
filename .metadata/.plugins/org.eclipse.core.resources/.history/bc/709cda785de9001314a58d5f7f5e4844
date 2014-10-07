@@ -1,0 +1,63 @@
+/*
+ * File: Hangman.java
+ * ------------------
+ * This program will eventually play the Hangman game from
+ * Assignment #4.
+ */
+
+import acm.graphics.*;
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.*;
+
+public class Hangman extends ConsoleProgram {
+	
+	private static final int LIVES = 8;
+	
+	
+    public void run() {
+		while (true) {
+			runGame();
+		}
+	}
+    
+    private void runGame() {
+    	greetUser();
+    	getWord();
+    	while (isGameRunning()) {
+    		nextTurn();
+    	}
+    	endGame();
+    	
+    }
+    
+    private void greetUser() {
+    	println("Welcome to Hangman for CS106A Assignment 4");
+    }
+    
+    private void getWord() {
+    	
+    }
+    
+    private void nextTurn() {
+    	
+    }
+    
+    private void endGame() {
+    	
+    }
+    
+    private boolean isGameRunning() {
+    	if (lives > 0) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    
+    private int lives = LIVES;
+    private String word;
+}

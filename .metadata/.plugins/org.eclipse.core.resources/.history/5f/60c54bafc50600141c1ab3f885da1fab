@@ -1,0 +1,22 @@
+
+// section 7 interactors
+
+import acm.program.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+//
+public class sec7 extends GraphicsProgram {
+	
+	//
+	public void init() {
+		setSize(800, 600);
+		add(new JButton("Hello"), SOUTH);
+		addActionListeners();
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		println("hello");
+	}
+	
+}

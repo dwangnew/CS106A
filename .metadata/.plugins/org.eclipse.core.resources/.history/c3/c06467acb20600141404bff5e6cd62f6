@@ -1,0 +1,76 @@
+// section 5 #1
+
+import java.io.*;
+import acm.program.*;
+
+public class sec5 extends ConsoleProgram {
+	
+	// file to be read
+	private static final String FILE = "lear.txt";
+	
+	// 1. word count
+	public void run() {
+		//make window larger
+		setSize(800,600);
+		// print greeting
+		println("Section 5 #1 : Read text from file and count lines,words,chars");
+		println("File is: " + FILE);
+		// make reader object
+		BufferedReader rd = readFile(FILE);
+		displayCounter(rd);
+	}
+	
+	// open the file
+	private BufferedReader readFile(String filename) {
+		// error handling try catch block and initialize beforehand
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader(filename));
+			
+		}
+		catch (FileNotFoundException e ) {
+			// print error
+		}
+		return rd;
+	}
+	
+	// count things
+	private void displayCounter(BufferedReader rd) {
+		int lines = 0;
+		int words = 0;
+		int chars = 0;
+		try {
+			while (true) {
+				String line = rd.readLine();
+				if (line == null) break;
+				lines++;
+				words += wordCount(line);
+				chars += charCount(line);
+			}
+		}
+		catch (Exception e) {
+			// print error
+		}
+		
+		println("lines " + lines);
+		println("words " + words);
+		println("chars " + chars);
+	}
+	
+	private int wordCount(String line) {
+		int words = 1;
+		for (int i = 0; i<line.length(); i ++ ) {
+			if ( ' ' == line.charAt(i)) {
+				words++;
+			}
+		}
+		
+		return words;
+	}
+	
+	private int charCount(String line) {
+		return line.length();
+	}
+	
+	
+}

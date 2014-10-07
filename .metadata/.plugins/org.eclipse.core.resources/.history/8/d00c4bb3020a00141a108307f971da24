@@ -1,0 +1,94 @@
+/*
+ * File: NameSurfer.java
+ * ---------------------
+ * When it is finished, this program will implements the viewer for
+ * the baby-name database described in the assignment handout.
+ */
+
+import acm.program.*;
+import acm.graphics.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+
+public class NameSurfer extends Program implements NameSurferConstants {
+
+/* Method: init() */
+/**
+ * This method has the responsibility for reading in the data base
+ * and initializing the interactors at the bottom of the window.
+ */
+	public void init() {
+	    // change window size
+		setSize(APPLICATION_WIDTH,APPLICATION_HEIGHT);
+		// textfield and its label
+		add(new JLabel("Name"), SOUTH);
+		add(textField , SOUTH);
+		// add buttons
+		add(new JButton("Graph"), SOUTH);
+		add(new JButton("Remove"), SOUTH);
+		add(new JButton("Clear"), SOUTH);
+		// event listeners
+		addActionListeners();
+		graph = new NameSurferGraph();
+		add(graph);
+	}
+
+/* Method: actionPerformed(e) */
+/**
+ * This class is responsible for detecting when the buttons are
+ * clicked, so you will have to define a method to respond to
+ * button actions.
+ */
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if ( cmd == "Graph" ) {
+			// get text from textfield
+			String name = textField.getText();
+			// console debugging
+			println("graph  " + name );
+			// get entry for name
+			NameSurferEntry entry = db.findEntry(name);
+			if (entry != null) {
+				// debug
+				println("entry for name is " + entry.getName() + " ranks 1 is : " + entry.getRank(1900) );
+				
+				
+				// get graph of name
+				
+				// add to canvas
+				graph.addEntry(entry);
+				
+			}
+			else {
+				println("entry not found");
+			}
+				
+		}
+		if ( cmd == "Remove" ){
+			// get correct box and remove
+			String name = textField.getText();
+			// remove(graphs.get(name));
+			// 
+			println("remove " + name );
+		}
+		if ( cmd == "Clear" ){
+			removeAll();
+			//
+			println("clear");
+			
+			//
+			
+		}
+	}
+	
+	// textfield for other functions to get its text
+	private JTextField textField = new JTextField(40);
+	// hashmap to keep track of new boxes
+	private HashMap<String, GCompound> graphs = new HashMap<String, GCompound>();
+	// init database
+	private NameSurferDataBase db = new NameSurferDataBase("names-data.txt");
+	// graph
+	private NameSurferGraph graph;
+	
+}

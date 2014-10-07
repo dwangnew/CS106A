@@ -1,0 +1,58 @@
+
+// section 8
+
+import acm.program.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.*;
+
+public class sec8 extends ConsoleProgram {
+	
+	//
+	public void run() {
+		// init db
+		createRoutes();
+		
+		// greeting
+		greetUser();
+		
+	}
+	
+	// reads file and fills in the routes hashmap
+	private void createRoutes() {
+		// open file using try/catch block
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(new FileReader("routes.txt"));
+		}
+		catch (Exception e) {
+			//
+			println("error opening file");
+		}
+		// read lines using try catch block
+		try {
+			while (true) {
+				String line = rd.readLine();
+				if (line == null) break;
+				// 
+				createRoute(line);
+			}
+		}
+		catch (Exception e) {
+			//
+			println("error reading line");
+		}
+	}
+	
+	
+	private void greetUser() {
+
+		println("Welcome to your travel agent. Please select starting city");
+		
+	}
+	
+	//
+	private HashMap<String,ArrayList<String>> routes;
+	private ArrayList<String> destinations;
+}
